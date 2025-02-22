@@ -2,19 +2,36 @@ package com.greetingapp;
 
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 @Service
 public class GreetingService {
 
-    // UC-3
+    private final Map<String, String> greetings = new HashMap<>();
+
     public String getGreetingMessage(String firstName, String lastName) {
+        String message;
         if (firstName != null && lastName != null) {
-            return "Hello " + firstName + " " + lastName + "!";
+            message = "Hello " + firstName + " " + lastName + "!";
         } else if (firstName != null) {
-            return "Hello " + firstName + "!";
+            message = "Hello " + firstName + "!";
         } else if (lastName != null) {
-            return "Hello " + lastName + "!";
+            message = "Hello " + lastName + "!";
         } else {
-            return "Hello World!";
+            message = "Hello World!";
         }
+        saveGreetingMessage(message);
+        return message;
+    }
+
+    private void saveGreetingMessage(String message) {
+        String id = UUID.randomUUID().toString();
+        greetings.put(id, message);
+    }
+
+    public Map<String, String> getAllGreetings() {
+        return new HashMap<>(greetings);
     }
 }

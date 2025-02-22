@@ -3,6 +3,8 @@ package com.greetingapp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/greeting") // Base URL for all requests
 public class GreetingController {
@@ -33,5 +35,11 @@ public class GreetingController {
     @DeleteMapping
     public String deleteGreeting() {
         return "Greeting deleted successfully.";
+    }
+
+    // GET request - Returns all stored greeting messages
+    @GetMapping("/all")
+    public Map<String, String> getAllGreetings() {
+        return greetingService.getAllGreetings();
     }
 }
