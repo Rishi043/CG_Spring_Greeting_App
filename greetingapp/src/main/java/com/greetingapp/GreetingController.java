@@ -4,16 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/greeting")
+@RequestMapping("/greeting") // Base URL for all requests
 public class GreetingController {
 
-    @Autowired                                   // Autowired Annotation
+    @Autowired
     private GreetingService greetingService;
 
-    // for UC-2
+    // GET request - Returns a greeting message based on provided user attributes
     @GetMapping
-    public String getGreeting() {
-        return greetingService.getGreetingMessage();      // by calling the method
+    public String getGreeting(@RequestParam(required = false) String firstName,
+                              @RequestParam(required = false) String lastName) {
+        return greetingService.getGreetingMessage(firstName, lastName);
     }
 
     // POST request - Takes a name and returns a personalized greeting
@@ -34,4 +35,3 @@ public class GreetingController {
         return "Greeting deleted successfully.";
     }
 }
-
