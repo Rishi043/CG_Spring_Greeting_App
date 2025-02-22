@@ -1,16 +1,19 @@
 package com.greetingapp;
 
-// Importing required Spring Boot annotations
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/greeting") // Base URL for all requests
+@RequestMapping("/greeting")
 public class GreetingController {
 
-    // GET request - Returns a simple greeting message
+    @Autowired                                   // Autowired Annotation
+    private GreetingService greetingService;
+
+    // for UC-2
     @GetMapping
     public String getGreeting() {
-        return "Hello, Welcome!";
+        return greetingService.getGreetingMessage();      // by calling the method
     }
 
     // POST request - Takes a name and returns a personalized greeting
@@ -31,3 +34,4 @@ public class GreetingController {
         return "Greeting deleted successfully.";
     }
 }
+
