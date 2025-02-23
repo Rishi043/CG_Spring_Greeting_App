@@ -42,4 +42,11 @@ public class GreetingService {
     public Map<String, String> getAllGreetings() {
         return new LinkedHashMap<>(greetings);
     }
+
+    // UC-5: Finds a greeting message by ID in the repository
+    public String getGreetingById(String id) {
+        return greetings.getOrDefault(id, "Greeting not found.");
+    }
+
+
 }
