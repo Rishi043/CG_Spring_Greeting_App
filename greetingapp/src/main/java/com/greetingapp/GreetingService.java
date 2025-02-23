@@ -2,21 +2,21 @@ package com.greetingapp;
 
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
 public class GreetingService {
 
-    private final Map<String, String> greetings = new LinkedHashMap<>();
+    private final Map<String, String> greetings = new HashMap<>();
     private int idCounter = 1;
 
-    // UC2: Returns a simple greeting message
+    // UC-2: Returns a simple greeting message
     public String getSimpleGreetingMessage() {
         return "Hello, Welcome!";
     }
 
-    // UC3: Returns a personalized greeting message based on user attributes
+    // UC-3: Returns a personalized greeting message based on user attributes
     public String getGreetingMessage(String firstName, String lastName) {
         String message;
         if (firstName != null && lastName != null) {
@@ -32,7 +32,7 @@ public class GreetingService {
         return message;
     }
 
-    // UC4: Saves a greeting message with a generated ID
+    // UC-4: Saves a greeting message with a generated ID
     private void saveGreetingMessage(String message) {
         String id = "id-" + idCounter++;
         greetings.put(id, message);
@@ -58,4 +58,13 @@ public class GreetingService {
         }
     }
 
+    // UC-8: Deletes a greeting message by ID in the repository
+    public String deleteGreetingById(String id) {
+        if (greetings.containsKey(id)) {
+            greetings.remove(id);
+            return "Greeting deleted successfully.";
+        } else {
+            return "Greeting not found.";
+        }
+    }
 }
