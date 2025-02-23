@@ -2,15 +2,21 @@ package com.greetingapp;
 
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.UUID;
 
 @Service
 public class GreetingService {
 
-    private final Map<String, String> greetings = new HashMap<>();
+    private final Map<String, String> greetings = new LinkedHashMap<>();
+    private int idCounter = 1;
 
+    // UC2: Returns a simple greeting message
+    public String getSimpleGreetingMessage() {
+        return "Hello, Welcome!";
+    }
+
+    // UC3: Returns a personalized greeting message based on user attributes
     public String getGreetingMessage(String firstName, String lastName) {
         String message;
         if (firstName != null && lastName != null) {
@@ -26,12 +32,21 @@ public class GreetingService {
         return message;
     }
 
+    // UC4: Saves a greeting message with a generated ID
     private void saveGreetingMessage(String message) {
-        String id = UUID.randomUUID().toString();
+        String id = "id-" + idCounter++;
         greetings.put(id, message);
     }
 
+    // UC4: Returns all stored greeting messages
     public Map<String, String> getAllGreetings() {
-        return new HashMap<>(greetings);
+        return new LinkedHashMap<>(greetings);
     }
+
+    // UC-5: Finds a greeting message by ID in the repository
+    public String getGreetingById(String id) {
+        return greetings.getOrDefault(id, "Greeting not found.");
+    }
+
+
 }
