@@ -60,4 +60,10 @@ public class GreetingController {
         return greetingService.getAllGreetings();
     }
 
+    // UC-7: Edits a greeting message by ID in the repository
+    @PutMapping("/{id}")
+    public String editGreetingById(@PathVariable String id, @RequestBody String newMessage) {
+        return greetingService.editGreetingById(id, newMessage);
+    }
+
 }
