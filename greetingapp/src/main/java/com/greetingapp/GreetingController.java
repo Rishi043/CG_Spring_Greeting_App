@@ -53,4 +53,11 @@ public class GreetingController {
     public String getGreetingById(@PathVariable String id) {
         return greetingService.getGreetingById(id);
     }
+
+    // UC-6: Lists all the greeting messages in the repository
+    @GetMapping("/list")
+    public Map<String, String> listAllGreetings() {
+        return greetingService.getAllGreetings();
+    }
+
 }

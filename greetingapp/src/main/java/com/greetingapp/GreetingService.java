@@ -38,15 +38,14 @@ public class GreetingService {
         greetings.put(id, message);
     }
 
-    // UC4: Returns all stored greeting messages
-    public Map<String, String> getAllGreetings() {
-        return new LinkedHashMap<>(greetings);
-    }
-
     // UC-5: Finds a greeting message by ID in the repository
     public String getGreetingById(String id) {
         return greetings.getOrDefault(id, "Greeting not found.");
     }
 
+    // UC-4 & UC-6: Returns all stored greeting messages
+    public Map<String, String> getAllGreetings() {
+        return greetings;
+    }
 
 }
