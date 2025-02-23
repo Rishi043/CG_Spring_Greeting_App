@@ -48,4 +48,14 @@ public class GreetingService {
         return greetings;
     }
 
+    // UC-7: Edits a greeting message by ID in the repository
+    public String editGreetingById(String id, String newMessage) {
+        if (greetings.containsKey(id)) {
+            greetings.put(id, newMessage);
+            return "Updated greeting: " + newMessage;
+        } else {
+            return "Greeting not found.";
+        }
+    }
+
 }
